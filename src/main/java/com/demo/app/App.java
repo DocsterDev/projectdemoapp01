@@ -44,15 +44,15 @@ public class App {
         log.info("Remainder: {}", remainder);
 
         // Apply filter to chunks
-        for (int i=0; i<(dataSize-remainder); i+=(filterSize+1)) {
+        for (int i=0; i<(dataSize-remainder); i+=filterSize) {
             List<Double> chunkData = data.subList(i, i+filterSize);
-            log.info("Chunk : {} to {}", i, i+filterSize);
+            log.info("Chunk : {} to {}", i, (i+filterSize)-1);
             log.info(chunkData.toString());
         }
 
         // Apply filter to remainder
         List<Double> chunkData = data.subList(dataSize-remainder, dataSize);
-        log.info("Chunk : {} to {}", dataSize-remainder, dataSize);
+        log.info("Chunk : {} to {}", dataSize-remainder, dataSize-1);
         log.info(chunkData.toString());
     }
 
