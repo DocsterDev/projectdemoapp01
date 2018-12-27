@@ -51,8 +51,8 @@ public class App {
         }
 
         // Apply filter to remainder
-        List<Double> chunkData = data.subList(((dataSize-1)-remainder), dataSize);
-        log.info("Chunk : {} to {}", ((dataSize-1)-remainder), dataSize);
+        List<Double> chunkData = data.subList(dataSize-remainder, dataSize);
+        log.info("Chunk : {} to {}", dataSize-remainder, dataSize);
         log.info(chunkData.toString());
     }
 
