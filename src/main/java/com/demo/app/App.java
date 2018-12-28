@@ -8,7 +8,7 @@ import java.util.List;
 @Slf4j
 public class App {
 
-    private static final double[] FILTER = {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7};
+    private static final double[] FILTER = {0.1, 0.2, 0.3};
 
     public static void main(String[] args) {
         log.info("Begin test");
@@ -20,7 +20,7 @@ public class App {
 
     private void createTestData(List<Double> data) {
         log.info("Creating test data...");
-        for (int i=0; i<100; i++) {
+        for (int i = 0; i < 100; i++) {
             data.add(Math.random());
         }
         log.info(data.toString());
