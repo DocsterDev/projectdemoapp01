@@ -8,7 +8,7 @@ import java.util.List;
 @Slf4j
 public class App {
 
-    private static final double[] FILTER = {0.1, 0.2, 0.3, 0.4, 0.5, 0.6};
+    private static final double[] FILTER = {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7};
 
     public static void main(String[] args) {
         log.info("Begin test");
@@ -26,45 +26,58 @@ public class App {
         log.info(data.toString());
     }
 
+    private int calculateFilterLookback(double[] filter) {
+        log.info("Calculating filter lookback length...");
+        int lookback = filter.length / 2;
+        log.info("Filter lookback: {}", lookback);
+        return lookback;
+    }
+
     private void applyFilter(List<Double> data, double[] filter) {
+        int lookback = calculateFilterLookback(filter);
+
         log.info("Applying filter...");
+
         int dataSize = data.size();
         int filterSize = filter.length;
+        int startIndex = lookback;
+        int endIndex = dataSize - lookback;
+        log.info("Data size: {}", dataSize);
+        log.info("Filter size: {}", filterSize);
+        log.info("Data start index: {}", startIndex);
+        log.info("Data end index: {}", endIndex);
+
+        // Validate input data
+        validate(dataSize, filterSize);
+
+        List<Double> filteredOutput = Lists.newArrayList();
+        // Apply filter to data
+        for (int i = startIndex; i < endIndex; i++) {
+            List<Double> dataChunk = data.subList(i-lookback, i+(lookback+1));
+            log.info("Data Chunk Index: {} to {}", i-lookback, i+lookback);
+            log.info("Data Chunk: {}", dataChunk);
+            double filteredValue = applyFilterSegment(dataChunk, filter);
+            filteredOutput.add(filteredValue);
+            log.info("Filtered Value: {}", filteredValue);
+            log.info("Filtered Output: {}", filteredOutput);
+        }
+    }
+
+    private double applyFilterSegment(List<Double> data, double[] filter) {
+        double filteredValue = 0;
+        for (int i = 0; i < data.size(); i++) {
+            filteredValue += (data.get(i) * filter[i]);
+        }
+        return filteredValue;
+    }
+
+    private void validate(int dataSize, int filterSize) {
         if (filterSize > dataSize) {
             throw new RuntimeException("Data size must be greater than filter size");
         }
-        // Calculate chunks
-        int chunks = dataSize / filterSize;
-        // Calculate remainder
-        int remainder = dataSize % filterSize;
-
-        log.info("Data size: {}", dataSize);
-        log.info("Filter size: {}", filterSize);
-        log.info("Chunks: {}", chunks);
-        log.info("Remainder: {}", remainder);
-
-        // Apply filter to chunks
-        for (int i=0; i<(dataSize-remainder); i+=filterSize) {
-            List<Double> chunkData = data.subList(i, i+filterSize);
-            log.info("Chunk : {} to {}", i, (i+filterSize)-1);
-            log.info(chunkData.toString());
+        if ((filterSize % 2) == 0 || filterSize == 1) {
+            log.warn("Filter is an even length at {}. For best results, create a filter with an odd number of values.", filterSize);
         }
-
-        // Apply filter to remainder
-        List<Double> chunkData = data.subList(dataSize-remainder, dataSize);
-        log.info("Chunk : {} to {}", dataSize-remainder, dataSize-1);
-        log.info(chunkData.toString());
     }
-
-    private double[] applyFilterSegment(double[] data, double[] filter) {
-        assert(data.length == filter.length);
-        double[] filteredData = new double[data.length];
-        for (int i=0; i<data.length; i++) {
-            filteredData[i] = data[i] * filter [i];
-        }
-        return filteredData;
-    }
-
-
 
 }
