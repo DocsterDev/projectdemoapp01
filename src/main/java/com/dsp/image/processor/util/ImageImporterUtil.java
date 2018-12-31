@@ -27,8 +27,6 @@ public class ImageImporterUtil {
         BufferedImage image = ImageIO.read(new File("test-01.png"));
         int width = image.getWidth();
         int height = image.getHeight();
-        System.out.println("Width: " + width);
-        System.out.println("Height: " + height);
         for (int y = 0; y < height; y++) {
             StringBuilder sb = new StringBuilder();
             for (int x = 0; x < width; x++) {
@@ -44,8 +42,6 @@ public class ImageImporterUtil {
         BufferedImage image = ImageIO.read(new File("test-01.png"));
         int width = image.getWidth();
         int height = image.getHeight();
-        System.out.println("Width: " + width);
-        System.out.println("Height: " + height);
         for (int y = 0; y < height; y++) {
             StringBuilder sb = new StringBuilder();
             for (int x = 0; x < width; x++) {
@@ -54,11 +50,8 @@ public class ImageImporterUtil {
 
 
                 /**
-                 *
                  * If pixel is black, convert pixel to blue
-                 *
-                 *
-                  */
+                 */
                 if (color.getRed() == 0 && color.getGreen() == 0 && color.getBlue() == 0) {
                     Color c2 = new Color(0, 0, 255);
                     image.setRGB(x, y, c2.getRGB());
