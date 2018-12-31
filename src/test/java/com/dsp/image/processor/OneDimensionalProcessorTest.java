@@ -1,13 +1,13 @@
-package com.demo.app;
+package com.dsp.image.processor;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 /**
- * Unit test for simple App.
+ * Unit test for simple OneDimensionalProcessor.
  */
-public class AppTest 
+public class OneDimensionalProcessorTest
 {
     /**
      * Rigorous Test :-)

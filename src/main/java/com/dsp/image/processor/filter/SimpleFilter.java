@@ -1,4 +1,4 @@
-package com.demo.app.filter;
+package com.dsp.image.processor.filter;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,4 +1,4 @@
-package com.demo.app;
+package com.dsp.image.processor;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -8,16 +8,16 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-public class App {
+public class OneDimensionalProcessor {
 
     private static final double[] FILTER = {0.1, 0.2, 0.3, 0.4, 0.5};
 
     public static void main(String[] args) {
         log.info("Begin test");
-        App app = new App();
+        OneDimensionalProcessor oneDimensionalProcessor = new OneDimensionalProcessor();
         List<Double> data = Lists.newArrayList();
-        app.createTestData(data);
-        app.applyFilter(data, FILTER);
+        oneDimensionalProcessor.createTestData(data);
+        oneDimensionalProcessor.applyFilter(data, FILTER);
     }
 
     private void createTestData(List<Double> data) {
