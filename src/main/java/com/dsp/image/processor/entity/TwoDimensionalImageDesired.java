@@ -5,7 +5,7 @@ import lombok.Data;
 import java.awt.image.BufferedImage;
 
 @Data
-public class TwoDimensionalDesiredImage extends Image {
+public class TwoDimensionalImageDesired extends Image {
 
     static final double INIT_SCOPE_PERCENTAGE = 0.25;
 
@@ -13,7 +13,7 @@ public class TwoDimensionalDesiredImage extends Image {
     private double mu;
     private int filterSize;
 
-    public TwoDimensionalDesiredImage(BufferedImage image, int filterSize) {
+    public TwoDimensionalImageDesired(BufferedImage image, int filterSize) {
         init(image);
         this.filterSize = filterSize;
         calculateImageIntensity();
