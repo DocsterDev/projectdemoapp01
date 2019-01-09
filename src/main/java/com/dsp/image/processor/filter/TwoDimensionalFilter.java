@@ -1,8 +1,10 @@
 package com.dsp.image.processor.filter;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Data
 public class SimpleFilter implements Filter {
 
     private double[] filter;
@@ -14,9 +16,10 @@ public class SimpleFilter implements Filter {
         log.info("Initiated filter with value: {}", this.filter);
     }
 
-    @Override
-    public double[] getFilter() {
-        return this.filter;
+    public void init() {
+        if (length == 0) {
+            throw new RuntimeException("Filter length must be defined and greater than 0");
+        }
     }
 
     @Override
